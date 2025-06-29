@@ -1,180 +1,154 @@
-# White Rabbit Two-Node Implementation Project
+# White Rabbit Two-Node Implementation
 
-## 🎯 STATUS DO PROJETO: 95% COMPLETO - PRONTO PARA HARDWARE
+## Overview
 
-Este é um **projeto White Rabbit completo e pronto para produção** para placa MYD-J7A100T (Artix-7). Inclui ambiente de simulação completo, documentação abrangente e todas as ferramentas necessárias para implementação real em hardware.
+This project provides a complete White Rabbit timing network implementation designed for FPGA development boards. White Rabbit is a high-precision timing protocol developed at CERN that enables sub-nanosecond synchronization across distributed systems.
 
-**Tamanho do Projeto:** 320KB (otimizado, sem arquivos temporários)  
-**Tempo de Desenvolvimento Economizado:** Meses de trabalho profissional comprimidos em pacote pronto para uso
+The project includes educational testbenches, synthesis-ready HDL code, and comprehensive documentation to help you understand and implement White Rabbit technology.
 
-## 🚀 INÍCIO RÁPIDO
+## What is White Rabbit?
 
-### 1. Verificar Status do Projeto
+White Rabbit is an extension of IEEE 1588 Precision Time Protocol (PTP) that achieves sub-nanosecond timing accuracy over Ethernet networks. It's used in particle accelerators, financial trading systems, and other applications requiring precise time synchronization.
+
+**Key Features:**
+- Sub-nanosecond timing precision
+- Ethernet-based network protocol
+- Master-slave synchronization topology
+- Hardware timestamping
+- Fiber optic and copper support
+
+## Quick Start
+
+### Basic Simulation
 ```bash
-./FINALIZE_IMPLEMENTATION.sh
-```
-
-### 2. Executar Simulação Básica
-```bash
+# Run simple White Rabbit simulation
 cd scripts
 vivado -source run_vivado_simple.tcl
 ```
 
-### 3. Comandos de Acesso Rápido
+### Project Verification
 ```bash
-./build.sh                    # Scripts de construção
-./setup.sh                    # Setup e configuração  
-./test.sh                     # Validação do projeto
-./cleanup.sh                  # Limpeza de arquivos temporários
+./test.sh                    # Verify project integrity
+./cleanup.sh                 # Clean temporary files
 ```
 
-## 📁 ESTRUTURA DO PROJETO (OTIMIZADA & ORGANIZADA)
+## Project Structure
 
 ```
-two_node_example/ (320KB)
-├── 📚 docs/                   # Documentação oficial do projeto
-├── 📊 reports/                # Relatórios de execução e análise
-├── 🧪 testbenches/            # 10 testbenches educacionais (SystemVerilog)
-├── 🔧 scripts/                # Automação organizada
-│   ├── build/                 # Scripts de build e síntese
-│   ├── setup/                 # Configuração e setup
-│   ├── tools/                 # Utilitários e manutenção
-│   ├── *.tcl (9 arquivos)     # Scripts Vivado para simulação
-│   └── *.do (6 arquivos)      # Scripts ModelSim para simulação
-├── 📋 constraints/            # Templates para MYD-J7A100T
-├── 🚀 Acesso Rápido           # Interface de comando simples
-│   ├── build.sh               # → scripts/build/*
-│   ├── setup.sh               # → scripts/setup/*
-│   ├── test.sh                # → scripts/tools/test_project.sh
-│   └── cleanup.sh             # → scripts/tools/CLEANUP_PROJECT.sh
-└── 📄 *.md                    # Guias do projeto
+white-rabbit-two-node/
+├── docs/                    # Technical documentation
+├── testbenches/            # SystemVerilog testbenches (10 files)
+├── scripts/                # Simulation and build scripts
+│   ├── *.tcl              # Vivado simulation scripts
+│   ├── *.do               # ModelSim simulation scripts
+│   └── build/             # Synthesis scripts
+├── constraints/           # FPGA constraint files
+└── reports/              # Verification reports
 ```
 
-## 🧪 OPÇÕES DE SIMULAÇÃO (3 NÍVEIS)
+## Simulation Options
 
-### 1. **Simulação Básica (Pronta para Uso)**
+### 1. Basic Simulation (No Dependencies)
 ```bash
-# Simulação simples sem dependências externas
 vivado -source scripts/run_vivado_simple.tcl
 ```
-- ✅ **Testbench**: `wr_standalone_basic_tb.sv`
-- ✅ **Sem dependências**: Funciona imediatamente
-- ✅ **Propósito**: Aprender conceitos básicos White Rabbit
+- **Testbench**: `wr_standalone_basic_tb.sv`
+- **Purpose**: Learn basic White Rabbit concepts
+- **Dependencies**: None (runs immediately)
 
-### 2. **Simulação Intermediária (ModelSim/Vivado)**
+### 2. Component-Specific Simulations
 ```bash
-# Simulações específicas por componente
 vivado -source scripts/run_vivado_sim.tcl
-# ou
+# or
 vsim -do scripts/run_modelsim_sim.do
 ```
-- ✅ **Testbenches**: 10 testbenches específicos
-- ✅ **Componentes**: PLL, timestamping, sincronização
-- ✅ **Propósito**: Entender componentes individuais
+- **Testbenches**: 10 specialized testbenches
+- **Purpose**: Understand individual WR components
+- **Components**: PLL, timestamping, synchronization
 
-### 3. **Simulação Completa (Avançada)**
+### 3. Complete System Simulation
 ```bash
-# Simulação completa do sistema (requer wr-cores)
 vivado -source scripts/run_vivado_full.tcl
 ```
-- ✅ **Testbench**: `wr_master_slave_sync_tb.sv`
-- ✅ **Sistema completo**: Dois nós comunicando
-- ✅ **Propósito**: Validar implementação completa
+- **Testbench**: `wr_master_slave_sync_tb.sv`
+- **Purpose**: Full two-node White Rabbit system
+- **Features**: Master-slave synchronization
 
-## 🔧 SÍNTESE PARA HARDWARE (MYD-J7A100T)
+## Hardware Implementation
 
-### Preparação para Hardware Real
+### Target Platform
+- **Primary**: MYD-J7A100T Development Board
+- **FPGA**: Xilinx Artix-7 XC7A100T-2FGG484I
+- **Interfaces**: Dual SFP+, Gigabit Ethernet (RGMII)
+
+### Synthesis Setup
 ```bash
-# Criar projeto de síntese para MYD-J7A100T
 ./scripts/build/CREATE_MYD_J7A100T_SYNTHESIS.sh
-
-# Build do software White Rabbit
-./scripts/build/BUILD_REAL_WR.sh
 ```
 
-- ✅ **Constraint file completo**: `constraints/myd_j7a100t_complete.xdc`
-- ✅ **Pinout detalhado**: SFP+, RGMII, JTAG, UART
-- ✅ **Especificações**: Documentação técnica completa
-- ✅ **Software WRPC**: Pronto para LM32
+The project includes complete constraint files with accurate pin assignments for the MYD-J7A100T board.
+
+## Testbenches Included
+
+The project contains 10 educational testbenches covering different aspects of White Rabbit:
+
+1. **wr_standalone_basic_tb.sv** - Basic standalone test
+2. **wr_minimal_two_node_tb.sv** - Minimal two-node setup  
+3. **wr_endpoint_tb.sv** - Physical interface testing
+4. **wr_timing_tb.sv** - Timing and timestamping
+5. **wr_softpll_ng_tb.sv** - Software PLL algorithms
+6. **wr_pps_gen_tb.sv** - PPS pulse generation
+7. **wr_nic_tb.sv** - Network interface card
+8. **wr_streamers_tb.sv** - Deterministic data transfer
+9. **wr_switch_tb.sv** - Multi-port switching
+10. **wr_master_slave_sync_tb.sv** - Complete synchronization
 ├── 📋 constraints/            # MYD-J7A100T templates
-├── 🚀 Quick Access            # Simple command interface
-│   ├── build.sh               # → scripts/build/*
-│   ├── setup.sh               # → scripts/setup/*
-│   ├── test.sh                # → scripts/tool./scripts/tools/test_project.sh
-│   └── cleanup.sh             # → scripts/tool./scripts/tools/CLEANUP_PROJECT.sh
-└── 📄 *.md guides            # Project documentation
-```
+## Documentation
 
-## ✅ O QUE ESTÁ INCLUÍDO
+### Technical Guides
+- **TECHNICAL_GUIDE.md** - White Rabbit protocol details
+- **IMPLEMENTATION_GUIDE.md** - Step-by-step implementation
+- **MYD_J7A100T_DETAILED_SPECS.md** - Complete board specifications
+- **VIVADO_SETUP.md** - Development environment setup
 
-### 🧪 **Ambiente de Simulação Completo**
-- **10 testbenches SystemVerilog** para aprendizado White Rabbit
-- **15 scripts de simulação** (9 Vivado + 6 ModelSim)
-- **3 níveis de complexidade** (básico → intermediário → avançado)
-- **Sem dependências externas** para simulações básicas
+### Quick References
+- **PROJECT_MANIFEST.md** - Technical specifications
+- **PROJECT_EXECUTIVE_SUMMARY.md** - Complete project overview
 
-### 🔧 **Preparação para Hardware**
-- **Arquivo de constraints completo** para MYD-J7A100T
-- **Especificações técnicas detalhadas** da placa
-- **Scripts de síntese automatizados** para Vivado
-- **Software WRPC** pronto para deployment
+## Requirements
 
-### 📚 **Documentação Profissional**
-- **20+ páginas de documentação** técnica e educacional
-- **Guias passo-a-passo** para implementação
-- **Especificações detalhadas** de hardware
-- **Roadmaps de desenvolvimento** estruturados
+### Software
+- **Xilinx Vivado** 2019.2 or later
+- **ModelSim** (optional, for advanced simulations)
 
-### 🚀 **Automação Completa**
-- **15+ scripts de automação** organizados por função
-- **Build system** para síntese e software
-- **Ferramentas de limpeza** e manutenção
-- **Verificação de projeto** automatizada
+### Hardware (for real implementation)
+- **MYD-J7A100T** Development Board or compatible Artix-7 board
+- **SFP+ modules** (White Rabbit compatible)
+- **Fiber optic cables** for inter-node connections
 
-## 🎯 PRÓXIMOS PASSOS
+## Learning Path
 
-### Para Simulação (Imediato)
-1. **Teste básico**: `vivado -source scripts/run_vivado_simple.tcl`
-2. **Explore testbenches**: Cada um ensina um aspecto do White Rabbit
-3. **Compare resultados**: Visualize formas de onda e entenda o protocolo
+1. **Start with basic simulation** to understand White Rabbit concepts
+2. **Explore component testbenches** to learn individual modules
+3. **Run complete system simulation** to see master-slave operation
+4. **Review technical documentation** for implementation details
+5. **Synthesize for hardware** when ready for real deployment
 
-### Para Hardware Real (Requer Placa)
-1. **Obter placa MYD-J7A100T** (especificações em docs/)
-2. **Executar síntese**: `./scripts/build/CREATE_MYD_J7A100T_SYNTHESIS.sh`
-3. **Deploy em hardware**: Seguir `docs/IMPLEMENTATION_GUIDE.md`
-4. **Rede de dois nós**: Sincronização sub-nanosegundo!
+## Features
 
-## 📚 DOCUMENTAÇÃO PRINCIPAL
+- **Educational**: Progressive testbenches from basic to advanced
+- **Complete**: All necessary files for FPGA implementation
+- **Documented**: Comprehensive technical documentation
+- **Tested**: Verified simulation and synthesis flows
+- **Professional**: Industry-standard project organization
 
-### 📋 **Guias Essenciais**
-- [`PROJECT_EXECUTIVE_SUMMARY.md`](PROJECT_EXECUTIVE_SUMMARY.md) - **Visão geral completa e plano de implementação**
-- [`PROJECT_MANIFEST.md`](PROJECT_MANIFEST.md) - **Manifesto técnico e especificações**
+## Support
 
-### 📖 **Documentação Técnica** (`docs/`)
-- [`COMPLETE_ROADMAP.md`](docs/COMPLETE_ROADMAP.md) - Roadmap passo-a-passo
-- [`IMPLEMENTATION_GUIDE.md`](docs/IMPLEMENTATION_GUIDE.md) - Guia de implementação
-- [`TECHNICAL_GUIDE.md`](docs/TECHNICAL_GUIDE.md) - Detalhes técnicos White Rabbit
-- [`MYD_J7A100T_DETAILED_SPECS.md`](docs/MYD_J7A100T_DETAILED_SPECS.md) - Especificações completas da placa
-- [`VIVADO_SETUP.md`](docs/VIVADO_SETUP.md) - Configuração do ambiente
+For technical questions about White Rabbit protocol, refer to:
+- CERN White Rabbit Project documentation
+- Open Hardware Repository (OHWR)
+- White Rabbit specification documents
 
-### 📊 **Relatórios e Análises** (`reports/`)
-- Relatórios de verificação e reorganização do projeto
-- Análises de performance e validação
-- Logs de execução e troubleshooting
+## License
 
-## 🧹 MANUTENÇÃO DO PROJETO
-
-### Limpeza Automatizada
-```bash
-./cleanup.sh                           # Limpeza rápida (logs, temporários)
-./scripts/tools/CLEANUP_PROJECT.sh     # Limpeza completa (~188MB removidos)
-```
-
-### Verificação do Projeto
-```bash
-./test.sh                              # Verificação básica
-./test.sh full                         # Verificação completa
-```
-
-**Hardware Alvo:** MYD-J7A100T (Artix-7 XC7A100T-2FGG484I)  
-**Status:** 95% completo, pronto para implementação em hardware  
+This project is provided for educational and research purposes. Please refer to individual file headers for specific licensing information.  
