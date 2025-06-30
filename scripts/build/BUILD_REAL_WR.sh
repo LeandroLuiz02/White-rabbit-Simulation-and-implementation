@@ -312,6 +312,20 @@ else
             echo "Using existing ISE project as reference..."
             cp "$WR_BASE/wr-cores/syn/spec_1_1/wr_core_demo"/* . 2>/dev/null || true
         fi
+        
+        # Ultimate fallback: create standalone Vivado project
+        echo ""
+        echo "🔧 ALTERNATIVE: Creating standalone Vivado project..."
+        if [[ -f "$WR_BASE/two_node_wr/scripts/tools/create_standalone_vivado.sh" ]]; then
+            echo "Using standalone project generator (hdlmake-free approach)"
+            cd "$WR_BASE/two_node_wr"
+            if bash scripts/tools/create_standalone_vivado.sh; then
+                echo "✅ Standalone Vivado project created successfully!"
+                PROJECT_DIR="$WR_BASE/two_node_wr/vivado_standalone_project"
+            else
+                echo "❌ Standalone project creation also failed"
+            fi
+        fi
     fi
 fi
 
