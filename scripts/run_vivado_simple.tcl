@@ -1,5 +1,5 @@
 # --- Script Vivado XSim - Versão Simples Two-Node ---
-# Para rodar simple_two_node.sv no Vivado
+# Para rodar wr_standalone_basic_tb.sv no Vivado
 #
 # USO: vivado -mode batch -source run_vivado_simple.tcl
 #
@@ -19,7 +19,7 @@ if {![file exists $wr_cores_path]} {
 }
 
 # Arquivos para compilação
-set hdl_files [list "simple_two_node.sv"]
+set hdl_files [list "../testbenches/wr_standalone_basic_tb.sv"]
 
 # Adicionar arquivos do curso WR se disponíveis
 if {[file exists "$course_path/sim"]} {
@@ -44,7 +44,7 @@ puts "Adicionando arquivos fonte..."
 add_files -norecurse $hdl_files
 
 # Configurar top level
-set_property top simple_two_node_wr [get_filesets sim_1]
+set_property top wr_standalone_basic_tb [get_filesets sim_1]
 set_property top_lib xil_defaultlib [get_filesets sim_1]
 
 # Configurações de simulação
@@ -60,28 +60,28 @@ puts "Configurando visualização..."
 
 # Sistema
 add_wave_group "Sistema"
-add_wave /simple_two_node_wr/clk
+add_wave /wr_standalone_basic_tb/clk
 
 # Nó 1
 add_wave_group "Nó 1 (Master)"
-add_wave /simple_two_node_wr/uart_txd_node1
-add_wave /simple_two_node_wr/uart_data_node1
-add_wave /simple_two_node_wr/uart_valid_node1
-add_wave /simple_two_node_wr/link_up_node1
+add_wave /wr_standalone_basic_tb/uart_txd_node1
+add_wave /wr_standalone_basic_tb/uart_data_node1
+add_wave /wr_standalone_basic_tb/uart_valid_node1
+add_wave /wr_standalone_basic_tb/link_up_node1
 
 # Nó 2  
 add_wave_group "Nó 2 (Slave)"
-add_wave /simple_two_node_wr/uart_txd_node2
-add_wave /simple_two_node_wr/uart_data_node2
-add_wave /simple_two_node_wr/uart_valid_node2
-add_wave /simple_two_node_wr/link_up_node2
+add_wave /wr_standalone_basic_tb/uart_txd_node2
+add_wave /wr_standalone_basic_tb/uart_data_node2
+add_wave /wr_standalone_basic_tb/uart_valid_node2
+add_wave /wr_standalone_basic_tb/link_up_node2
 
 # Interconexão
 add_wave_group "Ethernet"
-add_wave /simple_two_node_wr/link_node1_to_node2_p
-add_wave /simple_two_node_wr/link_node1_to_node2_n
-add_wave /simple_two_node_wr/link_node2_to_node1_p
-add_wave /simple_two_node_wr/link_node2_to_node1_n
+add_wave /wr_standalone_basic_tb/link_node1_to_node2_p
+add_wave /wr_standalone_basic_tb/link_node1_to_node2_n
+add_wave /wr_standalone_basic_tb/link_node2_to_node1_p
+add_wave /wr_standalone_basic_tb/link_node2_to_node1_n
 
 # Executar simulação
 puts "Executando simulação por 100ms..."

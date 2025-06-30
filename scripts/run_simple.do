@@ -11,24 +11,19 @@ set WR_COURSE_PATH "../../course\ code\ examples/WR-Course"
 # Compile the simple two-node testbench
 vlog -sv +incdir+$WR_COURSE_PATH/sim \
      +incdir+$WR_CORES_PATH/sim \
-     simple_two_node.sv
+     ../testbenches/wr_standalone_basic_tb.sv
 
 # You'll need to add the spec_top module compilation here
 # This depends on your specific WR cores installation structure
 
 # Start simulation
-vsim -t 1ps work.simple_two_node_wr
+vsim -t 1ps work.wr_standalone_basic_tb
 
 # Add basic signals to wave
-add wave /simple_two_node_wr/clk
-add wave /simple_two_node_wr/uart_txd_node1
-add wave /simple_two_node_wr/uart_txd_node2
-add wave /simple_two_node_wr/uart_data_node1
-add wave /simple_two_node_wr/uart_data_node2
-add wave /simple_two_node_wr/uart_valid_node1  
-add wave /simple_two_node_wr/uart_valid_node2
-add wave /simple_two_node_wr/link_node1_to_node2_p
-add wave /simple_two_node_wr/link_node1_to_node2_n
+add wave /wr_standalone_basic_tb/clk
+add wave /wr_standalone_basic_tb/rst_n  
+add wave /wr_standalone_basic_tb/uart_txd
+add wave /wr_standalone_basic_tb/uart_rxd
 
 # Run simulation
 echo "Starting simple two-node simulation..."

@@ -21,7 +21,7 @@ proc check_files {} {
     set files_status [dict create]
     
     # Verificar arquivos de testbench
-    set testbenches [list "minimal_two_node.sv" "simple_two_node.sv" "two_node_testbench.sv"]
+    set testbenches [list "../testbenches/wr_minimal_two_node_tb.sv" "../testbenches/wr_standalone_basic_tb.sv" "../testbenches/wr_master_slave_sync_tb.sv"]
     foreach tb $testbenches {
         dict set files_status $tb [file exists $tb]
         if {[file exists $tb]} {
@@ -55,10 +55,10 @@ proc run_minimal {} {
 
 proc run_simple {} {
     puts "Executando versão SIMPLE..."
-    if {[file exists "simple_two_node.sv"]} {
+    if {[file exists "wr_standalone_basic_tb.sv"]} {
         source "run_vivado_simple.tcl"
     } else {
-        puts "ERRO: Arquivo simple_two_node.sv não encontrado!"
+        puts "ERRO: Arquivo wr_standalone_basic_tb.sv não encontrado!"
     }
 }
 
