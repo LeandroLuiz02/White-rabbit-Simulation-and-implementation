@@ -27,7 +27,6 @@ A organização segue uma **lógica de interface de usuário** vs **funcionalida
 | **scripts/build/** | Compilação e síntese específica | CREATE_MYD_J7A100T_SYNTHESIS.sh | Engenheiro FPGA |
 | **scripts/setup/** | Configuração detalhada | MYD_J7A100T_SETUP.sh | Engenheiro iniciando projeto |
 | **scripts/tools/** | Ferramentas especializadas | CLEANUP_PROJECT.sh (completo) | Administrador/mantenedor |
-| **scripts/analysis/** | Debugging e solução de problemas | ERROR_ANALYSIS.sh | Suporte técnico |
 
 ---
 
@@ -84,8 +83,8 @@ A organização segue uma **lógica de interface de usuário** vs **funcionalida
 ### 🔧 **ADMINISTRADOR/MANTENEDOR**
 ```bash
 # Acesso completo às ferramentas
-./scripts/tool./scripts/tools/CLEANUP_PROJECT.sh         # Limpeza completa
-./scripts/analysi./scripts/analysis/ERROR_ANALYSIS.sh       # Análise de problemas
+./scripts/tools/CLEANUP_PROJECT.sh         # Limpeza completa
+./scripts/tools/fix_hdlmake.sh             # Correções HDLMake
 ```
 
 ---
