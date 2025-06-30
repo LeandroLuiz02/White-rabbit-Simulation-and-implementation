@@ -119,7 +119,7 @@ find "$WR_CORES_DIR" -name "Manifest.py" -exec sed -i.bak 's|git://ohwr.org/hdl-
 find "$WR_CORES_DIR" -name "Manifest.py" -exec sed -i 's|git://ohwr.org/project/|https://ohwr.org/project/|g' {} \;
 
 # Fix 5: Create a working example in two_node_wr project  
-TWO_NODE_HDLMAKE_DIR="/home/leandro/Documents/code/white-rabbit/two_node_wr/hdlmake_working"
+TWO_NODE_HDLMAKE_DIR="/home/leandro/Documents/code/white-rabbit/two_node_wr/hdlmake_example"
 mkdir -p "$TWO_NODE_HDLMAKE_DIR"
 
 cat > "$TWO_NODE_HDLMAKE_DIR/Manifest.py" << 'EOF'

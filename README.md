@@ -43,6 +43,7 @@ white-rabbit-two-node/
 │   ├── *.do               # ModelSim simulation scripts
 │   └── build/             # Synthesis scripts
 ├── constraints/           # FPGA constraint files
+├── hdlmake_example/       # Working HDLMake example
 └── reports/              # Verification reports
 ```
 
