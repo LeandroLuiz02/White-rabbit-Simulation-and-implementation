@@ -138,7 +138,7 @@ module wr_minimal_two_node_tb;
    // Optional: Create VCD file for waveform analysis
    initial begin
       $dumpfile("minimal_two_node.vcd");
-      $dumpvars(0, minimal_two_node_wr);
+      $dumpvars(0, wr_minimal_two_node_tb);
    end
 
 endmodule

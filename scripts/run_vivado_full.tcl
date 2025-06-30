@@ -1,5 +1,5 @@
 # --- Script Vivado XSim - Versão Completa Two-Node ---
-# Para rodar two_node_testbench.sv no Vivado (versão mais completa)
+# Para rodar wr_master_slave_sync_tb.sv no Vivado (versão mais completa)
 #
 # USO: vivado -mode batch -source run_vivado_full.tcl
 #
@@ -23,7 +23,7 @@ if {![file exists $wr_cores_path]} {
 }
 
 # Lista de arquivos para simulação
-set hdl_files [list "two_node_testbench.sv"]
+set hdl_files [list "testbenches/wr_master_slave_sync_tb.sv"]
 
 # Tentar adicionar arquivos do WR cores automaticamente
 if {[file exists "$wr_cores_path"]} {
@@ -69,13 +69,13 @@ if {[llength $hdl_files] > 0} {
 
 # Configurar simulação
 puts "Configurando simulação..."
-set_property top two_node_testbench [get_filesets sim_1]
+set_property top wr_master_slave_sync_tb [get_filesets sim_1]
 set_property top_lib xil_defaultlib [get_filesets sim_1]
 
 # Parâmetros de simulação
 set_property -name {xsim.simulate.runtime} -value {50ms} -objects [get_filesets sim_1]
 set_property -name {xsim.simulate.log_all_signals} -value {true} -objects [get_filesets sim_1]
-set_property -name {xsim.simulate.wdb} -value {two_node_testbench.wdb} -objects [get_filesets sim_1]
+set_property -name {xsim.simulate.wdb} -value {wr_master_slave_sync_tb.wdb} -objects [get_filesets sim_1]
 
 # Tentar compilar e iniciar simulação
 puts "Compilando e iniciando simulação..."
@@ -90,38 +90,37 @@ puts "Configurando visualização avançada..."
 
 # Grupo: Sistema
 add_wave_group "Sistema" 
-add_wave /two_node_testbench/clk_125m
-add_wave /two_node_testbench/clk_20m
-add_wave /two_node_testbench/rst_n
+add_wave /wr_master_slave_sync_tb/clk_125m
+add_wave /wr_master_slave_sync_tb/clk_20m
+add_wave /wr_master_slave_sync_tb/rst_n
 
 # Grupo: Status dos Nós
 add_wave_group "Status dos Nós"
-add_wave /two_node_testbench/link_up_node1
-add_wave /two_node_testbench/link_up_node2
-add_wave /two_node_testbench/pps_node1
-add_wave /two_node_testbench/pps_node2
+add_wave /wr_master_slave_sync_tb/link_up_node1
+add_wave /wr_master_slave_sync_tb/link_up_node2
+add_wave /wr_master_slave_sync_tb/pps_node1
+add_wave /wr_master_slave_sync_tb/pps_node2
 
 # Grupo: UART Debug
 add_wave_group "UART Debug"
-add_wave /two_node_testbench/uart_txd_node1
-add_wave /two_node_testbench/uart_txd_node2
-add_wave -radix ascii /two_node_testbench/uart_data_node1
-add_wave -radix ascii /two_node_testbench/uart_data_node2
-add_wave /two_node_testbench/uart_valid_node1
-add_wave /two_node_testbench/uart_valid_node2
+add_wave /wr_master_slave_sync_tb/uart_txd_node1
+add_wave /wr_master_slave_sync_tb/uart_txd_node2
+add_wave -radix ascii /wr_master_slave_sync_tb/uart_data_node1
+add_wave -radix ascii /wr_master_slave_sync_tb/uart_data_node2
+add_wave /wr_master_slave_sync_tb/uart_valid_node1
+add_wave /wr_master_slave_sync_tb/uart_valid_node2
 
 # Grupo: Ethernet Físico
 add_wave_group "Ethernet Físico"
-add_wave /two_node_testbench/sfp_txp_1to2
-add_wave /two_node_testbench/sfp_txn_1to2
-add_wave /two_node_testbench/sfp_txp_2to1
-add_wave /two_node_testbench/sfp_txn_2to1
+add_wave /wr_master_slave_sync_tb/sfp_txp_1to2
+add_wave /wr_master_slave_sync_tb/sfp_txn_1to2
+add_wave /wr_master_slave_sync_tb/sfp_txp_2to1
+add_wave /wr_master_slave_sync_tb/sfp_txn_2to1
 
-# Grupo: Medições de Tempo
-add_wave_group "Medições"
-add_wave /two_node_testbench/pps1_time
-add_wave /two_node_testbench/pps2_time
-add_wave /two_node_testbench/time_diff
+# Grupo: Instâncias dos Nós
+add_wave_group "Instâncias dos Nós"
+add_wave /wr_master_slave_sync_tb/node1/*
+add_wave /wr_master_slave_sync_tb/node2/*
 
 # Configurar formato de exibição
 configure_wave -namecolwidth 200

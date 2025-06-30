@@ -220,7 +220,7 @@ module wr_master_slave_sync_tb;
    // Generate VCD file for waveform viewing
    initial begin
       $dumpfile("two_node_wr.vcd");
-      $dumpvars(0, two_node_testbench);
+      $dumpvars(0, wr_master_slave_sync_tb);
    end
 
 endmodule

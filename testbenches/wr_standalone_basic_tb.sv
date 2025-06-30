@@ -154,7 +154,7 @@ module wr_standalone_basic_tb;
    // Gerar arquivo VCD para análise
    initial begin
       $dumpfile("simple_wr_test.vcd");
-      $dumpvars(0, simple_wr_testbench);
+      $dumpvars(0, wr_standalone_basic_tb);
    end
    
    // Monitor de atividade geral
