@@ -1,0 +1,123 @@
+# ==============================================
+# White Rabbit Two-Node Project - .gitignore
+# ==============================================
+
+# ==========================================
+# Vivado Simulation Projects (Temporary)
+# ==========================================
+vivado_sim_project/
+*_sim_project/
+*.sim/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+
+# ==========================================
+# Vivado Project Files (Generated)
+# ==========================================
+*.xpr
+*.xpfm
+*.str
+*.ppr
+*.jou
+*.log
+vivado*.backup.jou
+vivado*.backup.log
+vivado_pid*.str
+vivado_pid*.debug
+
+# ==========================================
+# Waveform Files (Large binary files)
+# ==========================================
+*.vcd
+*.wdb
+*.saif
+*.wcfg
+*.wlf
+*.vstf
+
+# ==========================================
+# Compilation and Synthesis Outputs
+# ==========================================
+*.bit
+*.ltx
+*.mmi
+*.prm
+*.dcp
+work/
+xsim.dir/
+.Xil/
+
+# ==========================================
+# ModelSim/QuestaSim Files
+# ==========================================
+transcript
+*.wlf
+*.do.bak
+modelsim.ini
+work/
+*.mpf
+
+# ==========================================
+# Simulation Temporary Files
+# ==========================================
+*.pb
+xelab.pb
+xvlog.pb
+*.backup.log
+webtalk*.jou
+webtalk*.log
+elaborate.log
+compile.log
+simulate.log
+
+# ==========================================
+# Build Directories and Reports
+# ==========================================
+reports/*.rpt
+reports/*.log
+reports/build_*
+reports/synthesis_*
+reports/implementation_*
+
+# ==========================================
+# Linux/Unix System Files
+# ==========================================
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Editor and IDE Files
+# ==========================================
+.vscode/
+.idea/
+*.sublime-*
+*.kate-swp
+
+# ==========================================
+# Temporary and Backup Files
+# ==========================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*_backup
+
+# ==========================================
+# Keep Important Files (Override above)
+# ==========================================
+!reports/README.md
+!docs/**
+!constraints/**
+!testbenches/**
+!scripts/**
+
+# ==========================================
+# Custom Project Specific
+# ==========================================
+# Add any project-specific ignores here
