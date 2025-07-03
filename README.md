@@ -51,7 +51,7 @@ white-rabbit-two-node/
 
 ### 1. Basic Simulation (No Dependencies)
 ```bash
-vivado -source scripts/run_vivado_simple.tcl
+vivado -mode batch -source run_vivado_simple.tcl
 ```
 - **Testbench**: `wr_standalone_basic_tb.sv`
 - **Purpose**: Learn basic White Rabbit concepts
