@@ -10,16 +10,22 @@ puts "========================================"
 
 # Caminhos principais
 set current_dir [pwd]
-set wr_cores_path "../wr-cores"
-set course_path "../course code examples/WR-Course"
+set script_dir [file dirname [info script]]
+set project_root [file normalize "$script_dir/.."]
+set wr_cores_path "$project_root/../wr-cores"
+set course_path "$project_root/../course code examples/WR-Course"
+
+puts "Script executado de: $current_dir"
+puts "Diretório do script: $script_dir"
+puts "Raiz do projeto: $project_root"
 
 # Verificar caminhos
 if {![file exists $wr_cores_path]} {
     puts "WARNING: wr-cores não encontrado em $wr_cores_path"
 }
 
-# Arquivos para compilação
-set hdl_files [list "../testbenches/wr_standalone_basic_tb.sv"]
+# Arquivos para compilação (caminho corrigido)
+set hdl_files [list "$project_root/testbenches/wr_standalone_basic_tb.sv"]
 
 # Adicionar arquivos do curso WR se disponíveis
 if {[file exists "$course_path/sim"]} {
@@ -33,11 +39,30 @@ if {[file exists "$wr_cores_path/top/spec_ref_design/spec_wr_ref_top.vhd"]} {
     puts "Adicionado: spec_wr_ref_top.vhd"
 }
 
+# Verificar se o arquivo testbench existe
+set testbench_file [lindex $hdl_files 0]
+if {![file exists $testbench_file]} {
+    puts "ERROR: Arquivo testbench não encontrado: $testbench_file"
+    puts "Diretório atual: [pwd]"
+    puts "Listando testbenches disponíveis:"
+    catch {glob "$project_root/testbenches/*.sv"} available_files
+    foreach file $available_files {
+        puts "  - [file tail $file]"
+    }
+    exit 1
+}
+
 puts "Arquivos a compilar: $hdl_files"
 
-# Criar projeto em memória
+# Criar projeto temporário (não in-memory)
+set project_name "wr_simple_sim"
+set project_dir "vivado_sim_temp"
+
 puts "Criando projeto de simulação..."
-create_project -in_memory -part xc7a100tcsg324-1
+if {[file exists $project_dir]} {
+    file delete -force $project_dir
+}
+create_project $project_name $project_dir -part xc7a100tcsg324-1
 
 # Adicionar arquivos
 puts "Adicionando arquivos fonte..."
@@ -93,3 +118,10 @@ puts "- Monitore UART output de ambos os nós"
 puts "- Verifique status dos links Ethernet"
 puts "- Use 'zoom fit' para visualizar tudo"
 puts "========================================"
+puts "Projeto salvo em: $project_dir"
+puts "Para abrir novamente: vivado $project_dir/$project_name.xpr"
+
+# Cleanup opcional - descomente para remover projeto temporário
+# puts "Removendo projeto temporário..."
+# close_project
+# file delete -force $project_dir

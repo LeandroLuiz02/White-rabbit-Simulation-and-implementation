@@ -20,19 +20,23 @@ proc print_banner {} {
 proc check_files {} {
     set files_status [dict create]
     
+    # Determinar caminhos corretos
+    set script_dir [file dirname [info script]]
+    set project_root [file normalize "$script_dir/.."]
+    
     # Verificar arquivos de testbench
-    set testbenches [list "../testbenches/wr_minimal_two_node_tb.sv" "../testbenches/wr_standalone_basic_tb.sv" "../testbenches/wr_master_slave_sync_tb.sv"]
+    set testbenches [list "$project_root/testbenches/wr_minimal_two_node_tb.sv" "$project_root/testbenches/wr_standalone_basic_tb.sv" "$project_root/testbenches/wr_master_slave_sync_tb.sv"]
     foreach tb $testbenches {
         dict set files_status $tb [file exists $tb]
         if {[file exists $tb]} {
-            puts "✓ Encontrado: $tb"
+            puts "✓ Encontrado: [file tail $tb]"
         } else {
-            puts "✗ Faltando: $tb"
+            puts "✗ Faltando: [file tail $tb]"
         }
     }
     
     # Verificar WR cores
-    set wr_cores_path "../wr-cores"
+    set wr_cores_path "$project_root/../wr-cores"
     if {[file exists $wr_cores_path]} {
         puts "✓ Diretório wr-cores encontrado"
         dict set files_status "wr_cores" true
