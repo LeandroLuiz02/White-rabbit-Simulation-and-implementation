@@ -40,7 +40,6 @@ white-rabbit-two-node/
 ├── testbenches/            # SystemVerilog testbenches (10 files)
 ├── scripts/                # Simulation and build scripts
 │   ├── *.tcl              # Vivado simulation scripts
-│   ├── *.do               # ModelSim simulation scripts
 │   └── build/             # Synthesis scripts
 ├── constraints/           # FPGA constraint files
 ├── hdlmake_example/       # Working HDLMake example
@@ -59,9 +58,7 @@ vivado -mode batch -source run_vivado_simple.tcl
 
 ### 2. Component-Specific Simulations
 ```bash
-vivado -source scripts/run_vivado_sim.tcl
-# or
-vsim -do scripts/run_modelsim_sim.do
+vivado -source scripts/run_vivado_simple.tcl
 ```
 - **Testbenches**: 10 specialized testbenches
 - **Purpose**: Understand individual WR components
@@ -120,7 +117,6 @@ The project contains 10 educational testbenches covering different aspects of Wh
 
 ### Software
 - **Xilinx Vivado** 2019.2 or later
-- **ModelSim** (optional, for advanced simulations)
 
 ### Hardware (for real implementation)
 - **MYD-J7A100T** Development Board or compatible Artix-7 board

@@ -13,13 +13,35 @@ scripts/
 ├── 📂 build/                  # Build and synthesis scripts
 ├── 📂 setup/                  # Configuration and preparation
 ├── 📂 tools/                  # Utilities and maintenance
-├── 📂 analysis/               # Debugging and error analysis
-├── 🔧 *.tcl                   # Vivado simulation scripts
-├── 🔧 *.do                    # ModelSim simulation scripts
-└── 🛠️ quick_cleanup.sh        # Quick temporary file cleanup
+├──  *.tcl                   # Vivado simulation scripts
+└── 🧹 cleanup_vivado.tcl      # Vivado cleanup utility
 ```
 
 ---
+
+## 🎯 SIMULATION SCRIPTS
+
+### **VIVADO SCRIPTS (**.tcl)**
+
+| Script | Testbench | Purpose | Complexity |
+|--------|-----------|---------|------------|
+| **run_vivado_simple.tcl** | `wr_standalone_basic_tb` | Basic White Rabbit simulation | ⭐⭐ Beginner |
+| **run_vivado_full.tcl** | `wr_master_slave_sync_tb` | Complete master-slave system | ⭐⭐⭐⭐⭐ Advanced |
+| **run_vivado_main.tcl** | Multiple testbenches | Comprehensive testing suite | ⭐⭐⭐⭐ Expert |
+| **run_all_vivado_sims.tcl** | All 10 testbenches | Run all simulations | ⭐⭐⭐ Intermediate |
+| **cleanup_vivado.tcl** | N/A | Clean Vivado temporary files | ⭐ Utility |
+
+### **USAGE EXAMPLES:**
+```bash
+# Vivado simulation (GUI mode)
+vivado -source scripts/run_vivado_simple.tcl
+
+# Vivado simulation (batch mode) 
+vivado -mode batch -source scripts/run_vivado_simple.tcl
+
+# Run all testbenches
+vivado -source scripts/run_all_vivado_sims.tcl
+```
 
 ## 📂 BUILD SCRIPTS (`build/`)
 
@@ -27,10 +49,8 @@ scripts/
 
 | Script | Function | Usage | When to Use |
 |--------|----------|-------|-------------|
-| **BUILD_REAL_WR.sh** | Builds WRPC software for LM32 processor | `./scripts/buil./scripts/build/BUILD_REAL_WR.sh` | Before hardware implementation |
-| **CREATE_MYD_J7A100T_SYNTHESIS.sh** | Creates Vivado synthesis project for MYD-J7A100T | `./scripts/buil./scripts/build/CREATE_MYD_J7A100T_SYNTHESIS.sh` | When ready for hardware synthesis |
-| **CREATE_VIVADO_SYNTHESIS.sh** | Generic Vivado synthesis project creation | `./scripts/build/CREATE_VIVADO_SYNTHESIS.sh` | For general FPGA targets |
-| **BUILD_HARDWARE_FIRST.sh** | Alternative build approach (hardware without LM32 first) | `./scripts/build/BUILD_HARDWARE_FIRST.sh` | Alternative implementation strategy |
+| **BUILD_REAL_WR.sh** | Builds WRPC software for LM32 processor | `./scripts/build/BUILD_REAL_WR.sh` | Before hardware implementation |
+| **CREATE_MYD_J7A100T_SYNTHESIS.sh** | Creates Vivado synthesis project for MYD-J7A100T | `./scripts/build/CREATE_MYD_J7A100T_SYNTHESIS.sh` | When ready for hardware synthesis |
 
 **Target Users:** Hardware engineers, FPGA developers
 **Dependencies:** Vivado, LM32 toolchain, wr-cores, wrpc-sw
@@ -43,8 +63,7 @@ scripts/
 
 | Script | Function | Usage | When to Use |
 |--------|----------|-------|-------------|
-| **MYD_J7A100T_SETUP.sh** | Board-specific setup guide for MYD-J7A100T | `./scripts/setu./scripts/setup/MYD_J7A100T_SETUP.sh` | Before hardware implementation |
-| **IMPLEMENTATION_ROADMAP.sh** | Shows implementation roadmap and progress | `./scripts/setup/IMPLEMENTATION_ROADMAP.sh` | Planning and progress tracking |
+| **MYD_J7A100T_SETUP.sh** | Board-specific setup guide for MYD-J7A100T | `./scripts/setup/MYD_J7A100T_SETUP.sh` | Before hardware implementation |
 
 **Target Users:** Project managers, hardware engineers starting implementation
 **Dependencies:** Board documentation, development tools
@@ -60,9 +79,7 @@ scripts/
 | **CLEANUP_PROJECT.sh** | Complete project cleanup (removes all temp files) | `./scripts/tools/CLEANUP_PROJECT.sh` | Weekly cleanup, before backups |
 | **test_project.sh** | Project validation and verification | `./scripts/tools/test_project.sh` | After changes, before deployment |
 | **quick_cleanup.sh** | Quick cleanup of simulation files | `./scripts/tools/quick_cleanup.sh` | After simulation runs |
-| **FINAL_PROJECT_VERIFICATION.sh** | Comprehensive systematic verification | `./scripts/tools/FINAL_PROJECT_VERIFICATION.sh` | Complete project validation |
-| **FIX_REFERENCES.sh** | Fix broken references in documentation | `./scripts/tools/FIX_REFERENCES.sh` | After file reorganization |
-| **VERIFICACAO_FINAL_COMPLETA.sh** | Final verification summary report | `./scripts/tools/VERIFICACAO_FINAL_COMPLETA.sh` | Project completion review |
+| **fix_hdlmake.sh** | Fix and generate HDLMake projects | `./scripts/tools/fix_hdlmake.sh` | HDLMake troubleshooting |
 
 **Target Users:** All project users
 **Dependencies:** None (standalone utilities)
@@ -90,18 +107,6 @@ scripts/
 |--------|----------|-------|-------------|
 | **run_vivado_simple.tcl** | ✅ **Main simulation script** | `cd scripts && vivado -source run_vivado_simple.tcl` | Primary simulation workflow |
 | **run_vivado.tcl** | Complete Vivado simulation | `cd scripts && vivado -source run_vivado.tcl` | Full feature simulation |
-| **run_vivado_test.tcl** | Test environment setup | `cd scripts && vivado -source run_vivado_test.tcl` | Testing configurations |
-| **run_vivado_full.tcl** | Advanced simulation with all features | `cd scripts && vivado -source run_vivado_full.tcl` | Complete system simulation |
-| **run_simulation.do** | ModelSim automation | `cd scripts && vsim -do run_simulation.do` | ModelSim users |
-| **wave.do** | Waveform configuration | Used by other scripts | Signal viewing setup |
-| **cleanup_vivado.tcl** | Vivado-specific cleanup | `cd scripts && vivado -source cleanup_vivado.tcl` | Clean Vivado projects |
-| **quick_cleanup.sh** | Quick temporary file removal | `./scripts/quick_cleanup.sh` | Daily development cleanup |
-
-**Target Users:** Simulation engineers, FPGA developers
-**Dependencies:** Vivado, ModelSim, testbench files
-
----
-
 ## 🎯 ROOT LEVEL QUICK ACCESS
 
 ### Purpose: **User-Friendly Interface for Common Operations**
@@ -133,7 +138,7 @@ Scripts in subdirectories are:
 - 🔧 **Direct execution** when you know exactly what you want
 
 ### **SIMULATION SCRIPTS = TECHNICAL TOOLS**
-Vivado/ModelSim scripts remain in `/scripts/` root because:
+Vivado scripts remain in `/scripts/` root because:
 - 🎯 **Technical nature** - used by simulation engineers
 - 🎯 **Established workflow** - `cd scripts && vivado -source ...`
 - 🎯 **Tool-specific** - Vivado expects certain directory structure
@@ -186,7 +191,7 @@ vivado -source run_vivado_simple.tcl   # Main simulation
 
 ### **Tool-Dependent Scripts**
 - `scripts/build/*` → Require Vivado, LM32 toolchain
-- Simulation scripts → Require Vivado or ModelSim
+- Simulation scripts → Require Vivado
 - `scripts/buil./scripts/build/BUILD_REAL_WR.sh` → Requires wr-cores, wrpc-sw
 
 ### **Project-Dependent Scripts**

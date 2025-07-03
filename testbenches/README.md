@@ -75,14 +75,14 @@ Esta pasta contém os testbenches SystemVerilog organizados e otimizados para o 
 
 ### Vivado:
 ```bash
-cd ../scripts
-vivado -source run_vivado_sim.tcl
-```
+# Basic simulation
+vivado -source ../scripts/run_vivado_simple.tcl
 
-### ModelSim:
-```bash
-cd ../scripts  
-vsim -do run_modelsim_sim.do
+# Complete simulation  
+vivado -source ../scripts/run_vivado_full.tcl
+
+# All testbenches
+vivado -source ../scripts/run_all_vivado_sims.tcl
 ```
 
 ### Testbench Específico:

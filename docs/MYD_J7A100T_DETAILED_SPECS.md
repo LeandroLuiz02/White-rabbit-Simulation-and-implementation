@@ -314,7 +314,7 @@
 |------|---------|---------|
 | Xilinx Vivado | 2019.2+ | FPGA synthesis & implementation |
 | Xilinx SDK/Vitis | 2019.2+ | Embedded software development |
-| ModelSim | 2019.4+ | HDL simulation |
+| GTKWave | Latest | Waveform viewer |
 | GCC Cross-Compiler | LM32 | Embedded C compilation |
 
 ### **Operating System Support**

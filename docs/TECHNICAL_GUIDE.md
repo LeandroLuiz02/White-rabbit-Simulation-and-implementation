@@ -162,8 +162,14 @@ The testbenches are designed for Xilinx Vivado XSim simulator:
 - **Simulation time**: Configurable (default 10ms for basic tests)
 - **Waveform capture**: Full signal recording for analysis
 
-### ModelSim Alternative
-Alternative scripts support Mentor ModelSim/QuestaSim:
+## Alternative Simulation Tools
+
+### GTKWave Integration
+The Vivado simulator can export VCD files for viewing in GTKWave:
+```bash
+# Add to your TCL script for VCD export
+add_force {/testbench/clk} -radix bin {0 0ns} {1 5ns} -repeat_every 10ns
+```
 
 - **Compilation order**: Managed via .do scripts
 - **Library management**: Automatic VHDL library setup
