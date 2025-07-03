@@ -25,11 +25,11 @@ scripts/
 
 | Script | Testbench | Purpose | Complexity |
 |--------|-----------|---------|------------|
-| **run_vivado_simple.tcl** | `wr_standalone_basic_tb` | Basic White Rabbit simulation | ⭐⭐ Beginner |
-| **run_vivado_full.tcl** | `wr_master_slave_sync_tb` | Complete master-slave system | ⭐⭐⭐⭐⭐ Advanced |
-| **run_vivado_main.tcl** | Multiple testbenches | Comprehensive testing suite | ⭐⭐⭐⭐ Expert |
-| **run_all_vivado_sims.tcl** | All 10 testbenches | Run all simulations | ⭐⭐⭐ Intermediate |
-| **cleanup_vivado.tcl** | N/A | Clean Vivado temporary files | ⭐ Utility |
+| **run_vivado_simple.tcl** | `wr_standalone_basic_tb` | Basic White Rabbit simulation | ⭐⭐  |
+| **run_vivado_full.tcl** | `wr_master_slave_sync_tb` | Complete master-slave system | ⭐⭐⭐⭐⭐  |
+| **run_vivado_main.tcl** | Multiple testbenches | Comprehensive testing suite | ⭐⭐⭐⭐  |
+| **run_all_vivado_sims.tcl** | All 10 testbenches | Run all simulations | ⭐⭐⭐  |
+| **cleanup_vivado.tcl** | N/A | Clean Vivado temporary files | ⭐  |
 
 ### **USAGE EXAMPLES:**
 ```bash
