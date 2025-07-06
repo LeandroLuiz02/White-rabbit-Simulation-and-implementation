@@ -19,7 +19,7 @@
 ### PHASE 1: ✅ SIMULATION MASTERY (COMPLETED)
 **Status**: ✅ **DONE** - You've mastered this!
 
-✅ Basic simulation working (`simple_wr_testbench.sv`)  
+✅ Basic simulation working (`wr_standalone_basic_tb.sv`)  
 ✅ Vivado environment configured  
 ✅ Understanding of WR concepts  
 ✅ Project structure organized  

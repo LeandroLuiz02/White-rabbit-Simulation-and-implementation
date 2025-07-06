@@ -19,7 +19,7 @@ Este projeto implementa uma simulação de **dois nós White Rabbit conectados**
 ### **Componentes Principais**
 
 #### **1. Testbenches (Diferentes Níveis de Complexidade)**
-- **`simple_wr_testbench.sv`** ✅ - **Simulação independente** (não precisa wr-cores)
+- **`wr_standalone_basic_tb.sv`** ✅ - **Simulação independente** (não precisa wr-cores)
   - Módulos `spec_top` simulados
   - Demonstra estrutura básica
   - Ideal para testes de conceito
@@ -60,28 +60,28 @@ Este projeto implementa uma simulação de **dois nós White Rabbit conectados**
 
 #### **1. Inicialização (NORMAL ✅)**
 ```
-✓ Testbench encontrado: simple_wr_testbench.sv
+✓ Testbench encontrado: wr_standalone_basic_tb.sv
 ✓ Projeto criado em: ./vivado_test
 ✓ Simulação iniciada com sucesso!
 ```
 **Interpretação**: Vivado encontrou arquivos, compilou sem erros, projeto criado com sucesso.
 
-#### **2. Compilação **
+#### **2. Compilação**
 ```
 INFO: [VRFC 10-311] analyzing module spec_top
 INFO: [VRFC 10-311] analyzing module uart_monitor_simple  
-INFO: [VRFC 10-311] analyzing module simple_wr_testbench
+INFO: [VRFC 10-311] analyzing module wr_standalone_basic_tb
 ```
 **Interpretação**: Todos os módulos SystemVerilog foram analisados e compilados corretamente.
 
-#### **3. Simulação Executando **
+#### **3. Simulação Executando**
 ```
-SPEC_TOP simulado inicializado (instância: simple_wr_testbench.wr_node1)
-SPEC_TOP simulado inicializado (instância: simple_wr_testbench.wr_node2)
+SPEC_TOP simulado inicializado (instância: wr_standalone_basic_tb.wr_node1)
+SPEC_TOP simulado inicializado (instância: wr_standalone_basic_tb.wr_node2)
 ```
-**Interpretação**: Ambos os nós White Rabbit inicializaram - isso é exatamente o que queremos!
+**Interpretação**: Ambos os nós White Rabbit inicializaram.
 
-#### **4. Atividade UART **
+#### **4. Atividade UART**
 ```
 [4000] Node 1 UART mudou para: 0
 [4000] Node 2 UART mudou para: 0
@@ -93,7 +93,7 @@ SPEC_TOP simulado inicializado (instância: simple_wr_testbench.wr_node2)
 - Ambos os nós transmitindo em sincronia
 - Timing: ~524ms entre transições (configuração do contador interno)
 
-#### **5. Conclusão **
+#### **5. Conclusão**
 ```
 - Clock funcionando: 1250 transições
 - Nós instanciados e conectados  
@@ -173,11 +173,11 @@ vivado ./vivado_test/wr_test_project.xpr
 
 ### **Sinais Importantes para Monitorar**
 ```systemverilog
-/simple_wr_testbench/ref_clk           // Clock principal
-/simple_wr_testbench/wr_node1/counter  // Contador interno Nó 1
-/simple_wr_testbench/wr_node2/counter  // Contador interno Nó 2
-/simple_wr_testbench/gb_txp_1to2       // Ethernet Nó1→Nó2
-/simple_wr_testbench/gb_txp_2to1       // Ethernet Nó2→Nó1
+/wr_standalone_basic_tb/ref_clk           // Clock principal
+/wr_standalone_basic_tb/wr_node1/counter  // Contador interno Nó 1
+/wr_standalone_basic_tb/wr_node2/counter  // Contador interno Nó 2
+/wr_standalone_basic_tb/gb_txp_1to2       // Ethernet Nó1→Nó2
+/wr_standalone_basic_tb/gb_txp_2to1       // Ethernet Nó2→Nó1
 ```
 
 ## ⚠️ **LIMITAÇÕES DA VERSÃO ATUAL**

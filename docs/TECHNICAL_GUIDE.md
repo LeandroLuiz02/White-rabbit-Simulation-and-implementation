@@ -27,7 +27,7 @@ White Rabbit is a precision time protocol that provides sub-nanosecond synchroni
 ### Implementation Levels
 
 #### 1. **Basic Level: Simulation Framework**
-- **File**: `simple_wr_testbench.sv`
+- **File**: `wr_standalone_basic_tb.sv`
 - **Purpose**: Concept demonstration without external dependencies
 - **Features**: 
   - Simulated SPEC nodes with basic interfaces
